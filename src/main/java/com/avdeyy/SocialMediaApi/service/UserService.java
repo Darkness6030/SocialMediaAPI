@@ -2,9 +2,7 @@ package com.avdeyy.SocialMediaApi.service;
 
 import com.avdeyy.SocialMediaApi.dto.UserDto;
 import com.avdeyy.SocialMediaApi.entity.User;
-import com.avdeyy.SocialMediaApi.repository.RoleRepository;
 import com.avdeyy.SocialMediaApi.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

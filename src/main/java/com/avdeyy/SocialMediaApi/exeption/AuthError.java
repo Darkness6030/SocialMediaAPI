@@ -14,6 +14,7 @@ public class AuthError {
         this.status = status;
         this.message = message;
         this.timestamp = new Date();
+
     }
 }
 

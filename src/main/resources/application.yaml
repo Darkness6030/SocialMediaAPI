@@ -4,12 +4,12 @@ server:
     context-path: /demo
 jwt:
   secret: 984hg493gh0439rthr0429uruj2309yh937gc763fe87t3f89723gf
-  lifetime: 10m
+  lifetime: 60m
 spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
   datasource:
     platform: root
     url: jdbc:postgresql://localhost:5432/socialmedia
