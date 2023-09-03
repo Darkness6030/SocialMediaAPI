@@ -37,5 +37,4 @@ public class PostService {
         postRepository.save(post);
         return ResponseEntity.ok(HttpStatus.OK);
     }
-
 }

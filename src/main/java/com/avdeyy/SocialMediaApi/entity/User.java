@@ -2,9 +2,8 @@ package com.avdeyy.SocialMediaApi.entity;
 
 
 import lombok.Data;
-
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.*;
 
 @Entity
 @Data
@@ -24,6 +23,16 @@ public class User {
     @Column(name = "email")
     private String email;
 
+  @ManyToMany
+  @JoinTable(name = "follower_following",
+          joinColumns = @JoinColumn(name = "follower_id", referencedColumnName = "id"),
+          inverseJoinColumns = @JoinColumn(name = "following_id", referencedColumnName = "id")
+  )
+  private List<User> followers;
+
+  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "followers")
+  private List<User> following;
+
     @ManyToMany
     @JoinTable(
             name = "users_roles",
@@ -31,4 +40,5 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Collection<Role> roles;
+
 }

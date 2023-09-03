@@ -19,6 +19,11 @@ public class AuthController {
         return authService.createAuthToken(authRequest);
     }
 
+    @PostMapping("/secured")
+    public String secured(){
+        return "secured";
+    }
+
     @PostMapping("/registration")
     public ResponseEntity<?> createNewUser(@RequestBody UserDto registrationUserDto) {
         return authService.createNewUser(registrationUserDto);

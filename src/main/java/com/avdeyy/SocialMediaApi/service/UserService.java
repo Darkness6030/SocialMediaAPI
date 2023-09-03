@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 @Service
 public class UserService implements UserDetailsService {
     private UserRepository userRepository;
-    private RoleService roleService;
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -27,10 +26,6 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    @Autowired
-    public void setRoleService(RoleService roleService) {
-        this.roleService = roleService;
-    }
 
     @Autowired
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
@@ -62,4 +57,5 @@ public class UserService implements UserDetailsService {
         user.setRoles(List.of());
         return userRepository.save(user);
     }
+
 }
