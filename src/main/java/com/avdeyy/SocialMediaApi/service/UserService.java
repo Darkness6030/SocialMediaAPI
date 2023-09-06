@@ -26,7 +26,6 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-
     @Autowired
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;

@@ -35,6 +35,7 @@ public class JwtAuthService {
         String token = jwtTokenUtils.createToken(userDetails);
         return ResponseEntity.ok(new JwtTokenResponse(token));
     }
+
     public ResponseEntity<?> createNewUser(@RequestBody UserDto registrationUserDto) {
         if (!registrationUserDto.getPassword().equals(registrationUserDto.getConfirmPassword())) {
             return new ResponseEntity<>(new AuthError(HttpStatus.BAD_REQUEST.value(), "Пароли не совпадают"), HttpStatus.BAD_REQUEST);
