@@ -3,7 +3,10 @@ package com.avdeyy.SocialMediaApi.service;
 import com.avdeyy.SocialMediaApi.dto.UserDto;
 import com.avdeyy.SocialMediaApi.entity.User;
 import com.avdeyy.SocialMediaApi.repository.UserRepository;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,11 +15,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
+@Getter
 public class UserService implements UserDetailsService {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
@@ -57,4 +64,13 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
+    public ResponseEntity<?> findByPrincipal(Principal principal, Function<User, ResponseEntity<?>> found) {
+        Optional<User> current = Optional.ofNullable(principal)
+                .map(Principal::getName)
+                .flatMap(this::findByUsername);
+
+        return current.isPresent() ?
+                found.apply(current.get()):
+                ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
 }

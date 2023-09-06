@@ -31,27 +31,11 @@ public class FollowingController {
 
     @PostMapping("/subscribe/{user}")
     public ResponseEntity<?> subscribe(Principal principal, @PathVariable User user) {
-        if (principal == null)
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-
-        Optional<User> currentUser = userService.findByUsername(principal.getName());
-        if (currentUser.isEmpty())
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-
-        followingService.subscribe(currentUser.get(), user);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return followingService.subscribe(principal, user);
     }
 
     @PostMapping("/unsubscribe/{user}")
     public ResponseEntity<?> unsubscribe(Principal principal, @PathVariable User user) {
-        if (principal == null)
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-
-        Optional<User> currentUser = userService.findByUsername(principal.getName());
-        if (currentUser.isEmpty())
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-
-        followingService.unsubscribe(currentUser.get(), user);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return followingService.unsubscribe(principal, user);
     }
 }
